@@ -1,0 +1,132 @@
+//- h1 Posts
+
+//- ul
+//-   each post in posts
+//-     li
+//-       | #{post.title} — #{post.content} - #{post.author}
+
+
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Postly
+    link(rel="stylesheet", href="/style.css")
+
+  body
+
+    header.navbar
+      .nav-content
+        a.logo(href="/") Postly
+
+        .nav-right
+          span.username @john_doe
+          a.btn.btn-outline(href="/login.html") Log out
+
+
+    main.main-container
+
+      //- =========================
+      //- CREATE POST
+      //- =========================
+
+      section.create-post
+        .create-header
+          .avatar J
+
+          div
+            h2 Create a post
+            p Share something with the community
+
+        form(action="/api/posts" method="POST")
+          input.post-title-input(
+            type="text"
+            name="title"
+            placeholder="Post title"
+            required
+          )
+
+          textarea.post-content-input(
+            name="content"
+            placeholder="What's on your mind?"
+            required
+          )
+
+          input(
+            type="hidden"
+            name="author"
+            value="John Doe"
+          )
+
+          .create-actions
+            button.btn.btn-primary(type="submit")
+              | Publish post
+
+
+      //- =========================
+      //- POSTS
+      //- =========================
+
+      section.posts-section
+
+        .section-title
+          h1 Latest posts
+          span #{posts.length} posts
+
+        if posts.length
+          each post in posts
+
+            article.post-card
+
+              .post-top
+                .author
+
+                  //- Первая буква имени автора
+                  .avatar= post.author ? post.author.charAt(0).toUpperCase() : "?"
+
+                  div
+                    strong= post.author
+                    span @#{post.author} · recently
+
+                .post-menu
+                  button.icon-btn(type="button") •••
+
+
+              .post-body
+                h2= post.title
+
+                p= post.content
+
+
+              .post-actions
+
+                button.post-action(type="button")
+                  | ♡ Like
+
+                button.post-action(type="button")
+                  | 💬 Comment
+
+                .post-owner-actions
+                  a.post-action.edit(href=`/api/posts/${post._id}`)
+                    | Edit
+
+                  form(
+                    action=`/api/posts/${post._id}`
+                    method="POST"
+                    style="display: inline;"
+                  )
+                    input(
+                      type="hidden"
+                      name="_method"
+                      value="DELETE"
+                    )
+
+                    button.post-action.delete(type="submit")
+                      | Delete
+
+        else
+          article.post-card
+            .post-body
+              h2 No posts yet
+              p Be the first one to share something with the community.
