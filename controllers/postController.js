@@ -24,7 +24,7 @@ class PostController {
         try {
             const {id} = req.params;
             if (!id) {
-                res.status(400).json("No id provided");
+                return res.status(400).json("No id provided");
             }
             const post = await Post.findByIdAndDelete(id);
             res.json(post);

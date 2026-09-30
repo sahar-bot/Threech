@@ -1,6 +1,8 @@
 import express from "express"
 import mongoose from "mongoose";
 import postRouter from "./routers/postRouter.js";
+import authRouter from "./routers/authRouter.js";
+
 
 const PORT = 3000;
 const DB = `mongodb+srv://admin:admin@cluster0.actk0hu.mongodb.net/?appName=Cluster0`;
@@ -10,6 +12,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/", postRouter);
+app.use("/auth", authRouter);
 
 // app.set("view-engine", "pug");
 
