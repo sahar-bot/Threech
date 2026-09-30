@@ -9,6 +9,16 @@ class PostController {
             res.status(500).json(e);
         }
     }
+
+    async createPost(req, res) {
+        try {
+            const {author, title, content} = req.body;
+            const post = await Post.create({author, title, content});
+            res.json(post);
+        } catch(e) {
+            res.status(500).json(e);
+        }
+    }
 }
 
 
