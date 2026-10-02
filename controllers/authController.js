@@ -37,6 +37,8 @@ class AuthController {
                 return res.status(400).json("Wrong password");
             }
 
+            
+
             // render main page
 
             
