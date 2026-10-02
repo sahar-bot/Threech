@@ -1,0 +1,44 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Registration
+        link(rel="stylesheet", href="/style.css")
+
+    body
+        header
+            a.logo(href="/") Threech
+
+            nav
+                a(href="/") Home
+                a(href="/auth/login") Login
+                a(href="/auth/registration") Register
+
+        main.container
+            .form-box
+                h1 Registration
+
+                if error
+                    p.error= error
+
+                form(action="/auth/registration", method="POST")
+                    label(for="username") Username
+                    input#username(
+                        type="text"
+                        name="username"
+                        required
+                    )
+
+                    label(for="password") Password
+                    input#password(
+                        type="password"
+                        name="password"
+                        required
+                    )
+
+                    button(type="submit") Register
+
+                p
+                    | Already have an account?
+                    a(href="/auth/login") Login

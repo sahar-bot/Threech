@@ -1,5 +1,7 @@
 import express from "express"
 import mongoose from "mongoose";
+import pug from "pug";
+import path from "path";
 import postRouter from "./routers/postRouter.js";
 import authRouter from "./routers/authRouter.js";
 
@@ -11,10 +13,18 @@ const app = express();
 
 app.use(express.json());
 
+// otherwise form doesn't work
+app.use(express.urlencoded({ extended: true }));
+
 app.use("/", postRouter);
 app.use("/auth", authRouter);
 
-// app.set("view-engine", "pug");
+
+app.set("view engine", "pug");
+app.set("views", path.join(process.cwd(), "views"));
+app.use(express.static(process.cwd()));
+
+
 
 
 async function startApp() {

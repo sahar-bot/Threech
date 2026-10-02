@@ -1,0 +1,125 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+}
+
+a {
+    color: #222;
+}
+
+p.error {
+    margin: 12px 0;
+    padding: 10px 14px;
+
+    color: #b42318;
+    background-color: #fef3f2;
+    border: 1px solid #fecdca;
+    border-radius: 6px;
+
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+
+
+header {
+    height: 60px;
+    padding: 0 20px;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.posts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.post,
+.form-box {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.author {
+    color: #777;
+    font-size: 14px;
+}
+
+.form-box {
+    max-width: 400px;
+    margin: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    border: 0;
+    border-radius: 5px;
+    background: #222;
+    color: #fff;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .posts {
+        grid-template-columns: 1fr;
+    }
+
+    header {
+        padding: 0 15px;
+    }
+
+    nav {
+        gap: 10px;
+    }
+
+    .container {
+        margin-top: 25px;
+    }
+}

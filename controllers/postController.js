@@ -4,7 +4,9 @@ class PostController {
     async getAll(req, res) {
         try {
             const posts = await Post.find();
-            res.json(posts);
+            // res.json(posts);
+
+            res.render("index", {posts});
         } catch(e) {
             res.status(500).json(e);
         }
