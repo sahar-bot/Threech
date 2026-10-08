@@ -1,9 +1,9 @@
-import { response } from "express";
+
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
+import { generateToken } from "../utils/authMiddleware.js";
 
 class AuthController {
-
 
     getRegistration(req, res) {
         try {
@@ -51,7 +51,6 @@ class AuthController {
             console.log(user);
             
             if (!user) {
-                // return res.status(400).json("User doesn't exist");
                 return res.status(400).render("login", {error: "User doesn't exist"});
             }
 
@@ -59,10 +58,14 @@ class AuthController {
             if (!validPassword) {
                 return res.status(400).render("login", {error: "Password is wrong"});
             }  
+            
+
+            res.cookie("token", generateToken(user.username), {maxAge: 60000, httpOnly: true});
 
             res.redirect("/");
 
         } catch(e) {
+            console.log(e);
             res.status(500).render("login", {error: "Something went wrong"});
         }
     }

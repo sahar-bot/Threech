@@ -6,8 +6,8 @@ import postRouter from "./routers/postRouter.js";
 import authRouter from "./routers/authRouter.js";
 
 
-const PORT = 3000;
-const DB = `mongodb+srv://admin:admin@cluster0.actk0hu.mongodb.net/?appName=Cluster0`;
+const PORT = process.env.PORT ?? 3000;
+const DB = process.env.DB;
 
 const app = express();
 
@@ -22,7 +22,7 @@ app.use("/auth", authRouter);
 
 app.set("view engine", "pug");
 app.set("views", path.join(process.cwd(), "views"));
-app.use(express.static(process.cwd()));
+app.use(express.static("views"));
 
 
 
