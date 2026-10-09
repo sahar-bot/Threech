@@ -11,10 +11,22 @@ export function generateToken(username) {
 
 }
 
-export function verityToken(req, res, next) {
+export function verifyToken(req, res, next) {
     const token = req.cookies.token
 
     if (!token) {
         return res.redirect("/auth/login");
+        // return false
     }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded;
+        next();
+    } catch(e) {
+        res.clearCookie("token");
+        return res.redirect("/auth/login");
+    }
+    
+    // return true
 }

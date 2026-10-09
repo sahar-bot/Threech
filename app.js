@@ -4,6 +4,7 @@ import pug from "pug";
 import path from "path";
 import postRouter from "./routers/postRouter.js";
 import authRouter from "./routers/authRouter.js";
+import cookieParser from "cookie-parser";
 
 
 const PORT = process.env.PORT ?? 3000;
@@ -15,6 +16,7 @@ app.use(express.json());
 
 // otherwise form doesn't work
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use("/", postRouter);
 app.use("/auth", authRouter);

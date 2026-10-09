@@ -1,5 +1,6 @@
 import Post from "../models/Post.js"
 
+
 class PostController {
     async getAll(req, res) {
         try {
