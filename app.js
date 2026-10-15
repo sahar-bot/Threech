@@ -12,21 +12,18 @@ const DB = process.env.DB;
 
 const app = express();
 
+
+app.set("view engine", "pug");
+app.set("views", path.join(process.cwd(), "views"));
+app.use(express.static("views"));
 app.use(express.json());
 
 // otherwise form doesn't work
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use("/", postRouter);
 app.use("/auth", authRouter);
-
-
-app.set("view engine", "pug");
-app.set("views", path.join(process.cwd(), "views"));
-app.use(express.static("views"));
-
-
+app.use("/", postRouter);
 
 
 async function startApp() {

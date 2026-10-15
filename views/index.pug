@@ -11,12 +11,24 @@ html(lang="en")
             a.logo(href="/") Threech
 
             nav
-                a(href="/") Home
-                a(href="/auth/login") Login
-                a(href="/auth/registration") Register
+                button#open-create(type="button") + New post
+                button(type="button", onclick="location.href='/'") Home
+                button(type="button", onclick="location.href='/auth/login'") Login
+                button(type="button", onclick="location.href='/auth/registration'") Registration
+        
+        dialog#create-dialog
+            form(action="/", method="POST")
+                h2 New post
+                input(type="text", name="title", placeholder="Title", required)
+                textarea(name="content", placeholder="What's on your mind?", required)
+                .actions
+                    button#close-create(type="button") Cancel
+                    button(type="submit") Post
 
         main.container
             h1 Latest Posts
+            if error
+                p.error= error
 
             if posts.length
                 .posts
@@ -25,6 +37,13 @@ html(lang="en")
                             h2= post.title
                             p.author by #{post.author}
                             p= post.content
+                            form.delete-form(action=`/${post._id}/delete`, method="POST")
+                                button.delete-btn(type="submit") Delete
             else
                 p No posts yet.
+            
+            script.
+                const dialog = document.getElementById("create-dialog");
+                document.getElementById("open-create").addEventListener("click", () => dialog.showModal());
+                document.getElementById("close-create").addEventListener("click", () => dialog.close());
 
