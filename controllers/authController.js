@@ -33,7 +33,7 @@ class AuthController {
 
             const hashPassword = bcrypt.hashSync(password, 10);
             const user = new User({username, password: hashPassword});
-            user.save();
+            await user.save();
             res.redirect("/auth/login");
             
         } catch(e) {
@@ -60,7 +60,7 @@ class AuthController {
             }  
             
 
-            res.cookie("token", generateToken(user.username), {maxAge: 60000, httpOnly: true});
+            res.cookie("token", generateToken(user.username), {maxAge: 24 * 60 * 60 * 1000, httpOnly: true});
 
             res.redirect("/");
 

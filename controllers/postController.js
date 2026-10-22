@@ -3,8 +3,9 @@ import Post from "../models/Post.js"
 
 class PostController {
     async getAll(req, res) {
+        const posts = await Post.find();
         try {
-            const posts = await Post.find();
+            
             // res.json(posts);
 
             res.render("index", {posts});
@@ -28,6 +29,7 @@ class PostController {
 
     async deletePost(req, res) {
         try {
+            const posts = await Post.find();
             const {id} = req.params;
             const author = req.user;
             if (!id) {
@@ -46,7 +48,6 @@ class PostController {
             // res.render("index", {uptPosts});
             res.redirect("/");
         } catch(e) {
-            const posts = await Post.find();
             res.status(500).render("index", {posts, error: "Something went wrong."});
         }
     }
