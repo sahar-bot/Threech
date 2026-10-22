@@ -9,26 +9,25 @@ class PostController {
 
             res.render("index", {posts});
         } catch(e) {
-            res.status(500).render("index", {posts, error: "Something went wrong."});;
+            res.status(500).render("index", {posts, error: "Something went wrong."});
         }
     }
 
     async createPost(req, res) {
         try {
-            const posts = await Post.find();
             const { title, content} = req.body;
             const author = req.user.username;
             const post = await Post.create({author, title, content});
             // res.status(200).json(post);
             res.redirect("/");
         } catch(e) {
+            const posts = await Post.find();
             res.status(500).render("index", {posts, error: "Something went wrong."});
         }
     }
 
     async deletePost(req, res) {
         try {
-            const posts = await Post.find();
             const {id} = req.params;
             const author = req.user;
             if (!id) {
@@ -47,6 +46,7 @@ class PostController {
             // res.render("index", {uptPosts});
             res.redirect("/");
         } catch(e) {
+            const posts = await Post.find();
             res.status(500).render("index", {posts, error: "Something went wrong."});
         }
     }

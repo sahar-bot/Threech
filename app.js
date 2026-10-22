@@ -16,6 +16,8 @@ const app = express();
 app.set("view engine", "pug");
 app.set("views", path.join(process.cwd(), "views"));
 app.use(express.static("views"));
+
+
 app.use(express.json());
 
 // otherwise form doesn't work
